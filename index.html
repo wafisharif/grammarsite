@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Independent vs. Dependent Clauses</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">Interactive Grammar Learning Tool</p>
+      <h1>Independent vs. Dependent Clauses</h1>
+      <p class="hero-sub">
+        Learn the difference, test yourself, build sentences, and stop guessing.
+      </p>
+      <div class="hero-buttons">
+        <button class="primary-btn" onclick="showSection('learn')">Start Learning</button>
+        <button class="secondary-btn" onclick="showSection('practice')">Jump to Practice</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="top-nav">
+    <button class="nav-btn active" data-section="learn" onclick="showSection('learn')">Learn</button>
+    <button class="nav-btn" data-section="flashcards" onclick="showSection('flashcards')">Flashcards</button>
+    <button class="nav-btn" data-section="practice" onclick="showSection('practice')">Practice</button>
+    <button class="nav-btn" data-section="analyzer" onclick="showSection('analyzer')">Analyzer</button>
+    <button class="nav-btn" data-section="builder" onclick="showSection('builder')">Clause Builder</button>
+    <button class="nav-btn" data-section="generator" onclick="showSection('generator')">Sentence Generator</button>
+  </nav>
+
+  <main class="container">
+    <!-- LEARN -->
+    <section id="learn" class="page-section">
+      <div class="section-header">
+        <h2>Learn the Core Idea</h2>
+        <p>
+          This is the whole game: an <strong>independent clause</strong> can stand alone as a complete sentence.
+          A <strong>dependent clause</strong> cannot.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Independent Clause</h3>
+          <p>Has a subject + verb + complete thought.</p>
+          <div class="example-box">
+            <p><strong>Example:</strong> The robot finished the race.</p>
+          </div>
+          <p class="small-note">This can stand by itself. It makes sense alone.</p>
+        </article>
+
+        <article class="card">
+          <h3>Dependent Clause</h3>
+          <p>Has a subject + verb, but does <strong>not</strong> express a complete thought.</p>
+          <div class="example-box">
+            <p><strong>Example:</strong> Because the robot finished the race</p>
+          </div>
+          <p class="small-note">You’re left hanging. Because it finished the race... what happened?</p>
+        </article>
+
+        <article class="card">
+          <h3>Common Dependent Clause Starters</h3>
+          <ul class="clean-list">
+            <li>because</li>
+            <li>although</li>
+            <li>since</li>
+            <li>when</li>
+            <li>if</li>
+            <li>while</li>
+            <li>unless</li>
+            <li>after</li>
+            <li>before</li>
+            <li>even though</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Quick Test</h3>
+          <p>Ask yourself:</p>
+          <ol class="clean-list numbered">
+            <li>Does it have a subject and verb?</li>
+            <li>Can it stand alone as a full sentence?</li>
+          </ol>
+          <p class="small-note">If the answer to #2 is no, it’s dependent.</p>
+        </article>
+      </div>
+
+      <div class="card callout">
+        <h3>Examples Side by Side</h3>
+        <div class="two-col">
+          <div>
+            <p class="label good">Independent</p>
+            <ul class="clean-list">
+              <li>The dog barked.</li>
+              <li>My teacher laughed at the meme.</li>
+              <li>The engineers tested the bridge.</li>
+              <li>I forgot my homework again.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="label warn">Dependent</p>
+            <ul class="clean-list">
+              <li>When the dog barked</li>
+              <li>Because my teacher laughed at the meme</li>
+              <li>Although the engineers tested the bridge</li>
+              <li>If I forgot my homework again</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Comma Rule You Actually Need</h3>
+        <p>
+          If a dependent clause comes <strong>before</strong> an independent clause, you usually use a comma.
+        </p>
+        <div class="example-box">
+          <p><strong>Correct:</strong> Because I was tired, I went to sleep.</p>
+          <p><strong>Also correct:</strong> I went to sleep because I was tired.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLASHCARDS -->
+    <section id="flashcards" class="page-section hidden">
+      <div class="section-header">
+        <h2>Flashcards</h2>
+        <p>Flip each card in your head first. Don’t cheat.</p>
+      </div>
+
+      <div class="flashcard card">
+        <p class="flashcard-label">Prompt</p>
+        <p id="flashcardPrompt" class="flashcard-text"></p>
+        <button class="primary-btn" onclick="revealFlashcard()">Reveal Answer</button>
+        <div id="flashcardAnswer" class="flashcard-answer hidden"></div>
+        <div class="flashcard-controls">
+          <button class="secondary-btn" onclick="prevFlashcard()">Previous</button>
+          <button class="secondary-btn" onclick="nextFlashcard()">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section id="practice" class="page-section hidden">
+      <div class="section-header">
+        <h2>Practice Quiz</h2>
+        <p>12 questions. Instant feedback. Explanations included. No excuses.</p>
+      </div>
+
+      <div class="card progress-card">
+        <div class="progress-top">
+          <span id="progressText">Question 1 of 12</span>
+          <span id="scoreText">Score: 0</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card question-card">
+        <p class="question-label">Sentence / Clause</p>
+        <p id="questionText" class="question-text"></p>
+
+        <div class="answer-buttons">
+          <button class="answer-btn independent" onclick="checkPracticeAnswer('independent')">
+            Independent Clause
+          </button>
+          <button class="answer-btn dependent" onclick="checkPracticeAnswer('dependent')">
+            Dependent Clause
+          </button>
+        </div>
+
+        <div id="practiceFeedback" class="feedback-box hidden"></div>
+
+        <div class="practice-controls">
+          <button class="secondary-btn" onclick="nextPracticeQuestion()">Next Question</button>
+          <button class="secondary-btn danger-btn" onclick="resetPractice()">Reset Quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANALYZER -->
+    <section id="analyzer" class="page-section hidden">
+      <div class="section-header">
+        <h2>Clause Analyzer</h2>
+        <p>
+          Type a clause or sentence and get a rule-based explanation. This is not magic. It uses grammar clues.
+        </p>
+      </div>
+
+      <div class="card">
+        <label for="analyzerInput" class="input-label">Enter text</label>
+        <textarea id="analyzerInput" rows="4" placeholder="Example: Because the rain started"></textarea>
+
+        <div class="tool-row">
+          <button class="primary-btn" onclick="analyzeClause()">Analyze</button>
+          <button class="secondary-btn" onclick="clearAnalyzer()">Clear</button>
+          <button class="secondary-btn" onclick="loadAnalyzerExample()">Load Example</button>
+        </div>
+
+        <div id="analyzerResult" class="result-box hidden"></div>
+      </div>
+
+      <div class="card quick-reference">
+        <h3>Quick Reference</h3>
+        <p><strong>Likely independent:</strong> complete thought + subject + verb</p>
+        <p><strong>Likely dependent:</strong> starts with a subordinating word and leaves you hanging</p>
+      </div>
+    </section>
+
+    <!-- BUILDER -->
+    <section id="builder" class="page-section hidden">
+      <div class="section-header">
+        <h2>Clause Builder</h2>
+        <p>
+          Click one dependent starter and one independent clause to build a full sentence.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Step 1: Choose a dependent starter</h3>
+        <div id="starterButtons" class="pill-grid"></div>
+
+        <h3>Step 2: Choose an independent clause</h3>
+        <div id="independentButtons" class="pill-grid"></div>
+
+        <div class="builder-output">
+          <p class="builder-label">Your sentence</p>
+          <p id="builderSentence" class="builder-sentence">Nothing built yet.</p>
+        </div>
+
+        <div class="tool-row">
+          <button class="primary-btn" onclick="buildSentence()">Build Sentence</button>
+          <button class="secondary-btn" onclick="resetBuilder()">Reset Builder</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERATOR -->
+    <section id="generator" class="page-section hidden">
+      <div class="section-header">
+        <h2>Random Sentence Generator</h2>
+        <p>Generate examples and classify them before revealing the answer.</p>
+      </div>
+
+      <div class="card">
+        <p class="question-label">Generated Example</p>
+        <p id="generatedSentence" class="question-text">Click the button to generate a sentence.</p>
+
+        <div class="tool-row">
+          <button class="primary-btn" onclick="generateSentence()">Generate</button>
+          <button class="secondary-btn" onclick="revealGeneratedAnswer()">Reveal Answer</button>
+        </div>
+
+        <div id="generatedAnswer" class="feedback-box hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Independent vs. Dependent Clauses Interactive Site</p>
+  </footer>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
